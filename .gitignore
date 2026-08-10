@@ -1,0 +1,41 @@
+# Secrets — must be the first entry in this file, and this file must exist
+# before .env is ever created.
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Tooling caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.uv/
+
+# Rollout cache (regenerable, keyed by prompt hash; large and uninteresting)
+.cache/
+outputs/
+*.jsonl.gz
+
+# Measured results ARE tracked: they are the evidence behind every number quoted in
+# the README and the report, and they cost metered quota to reproduce. Console logs
+# from those runs are not.
+runs/*.txt
+
+# Rendered report (source markdown is tracked, the PDF is a build product)
+report/*.pdf
+report/_render/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
