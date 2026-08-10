@@ -1,0 +1,55 @@
+{
+  "n": 400,
+  "seed": 1,
+  "matrix": {
+    "honest_oracle": {
+      "shipped": 1.0,
+      "format_bonus": 1.3,
+      "lenient_extractor": 1.0,
+      "membership_credit": 1.0,
+      "char_verbosity": 1.0
+    },
+    "empty_schema": {
+      "shipped": 0.0,
+      "format_bonus": 0.3,
+      "lenient_extractor": 0.0,
+      "membership_credit": 0.0,
+      "char_verbosity": 0.0
+    },
+    "shotgun_objects": {
+      "shipped": 0.24535830269607842,
+      "format_bonus": 0.6286916360294118,
+      "lenient_extractor": 0.7343166360294117,
+      "membership_credit": 0.32869163602941176,
+      "char_verbosity": 0.24218916666666665
+    },
+    "shotgun_lists": {
+      "shipped": 0.0,
+      "format_bonus": 0.3,
+      "lenient_extractor": 0.0,
+      "membership_credit": 0.845625,
+      "char_verbosity": 0.0
+    },
+    "key_stuffing": {
+      "shipped": 0.38354166666666667,
+      "format_bonus": 0.466875,
+      "lenient_extractor": 0.466875,
+      "membership_credit": 0.466875,
+      "char_verbosity": 0.38354166666666667
+    },
+    "terse_plausible_guess": {
+      "shipped": 0.411875,
+      "format_bonus": 0.711875,
+      "lenient_extractor": 0.411875,
+      "membership_credit": 0.411875,
+      "char_verbosity": 0.411875
+    },
+    "correct_but_padded": {
+      "shipped": 0.906953125,
+      "format_bonus": 1.206953125,
+      "lenient_extractor": 0.906953125,
+      "membership_credit": 0.906953125,
+      "char_verbosity": 0.9056011458333333
+    }
+  }
+}
