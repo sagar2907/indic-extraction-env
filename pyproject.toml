@@ -1,6 +1,6 @@
 [project]
 name = "indic-extraction-v1"
-version = "0.1.2"
+version = "0.1.3"
 description = "Structured extraction from Indic-script documents with a deterministic, script-aware verifier."
 readme = "README.md"
 requires-python = ">=3.11,<3.14"

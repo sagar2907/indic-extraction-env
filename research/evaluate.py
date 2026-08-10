@@ -321,7 +321,12 @@ def main(argv: list[str] | None = None) -> int:
         ),
     )
     parser.add_argument("--models", nargs="*", default=list(DEFAULT_MODELS))
-    parser.add_argument("--max-tokens", type=int, default=700)
+    parser.add_argument(
+        "--max-tokens",
+        type=int,
+        default=RolloutRequest.max_tokens,
+        help="Output-token ceiling. Defaults to RolloutRequest's, never a second literal.",
+    )
     parser.add_argument("--tier", default=None)
     parser.add_argument("--lang", default=None)
     parser.add_argument(

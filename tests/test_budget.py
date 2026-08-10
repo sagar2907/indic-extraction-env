@@ -7,6 +7,7 @@ about the ledger's arithmetic and its behaviour under interleaved writers.
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import pytest
 
@@ -251,3 +252,33 @@ def test_default_token_ceiling_clears_the_largest_observed_reasoning_burst() -> 
 
     largest_observed_reasoning_burst = 736
     assert RolloutRequest(model="m", prompt="p").max_tokens > largest_observed_reasoning_burst
+
+
+def test_cli_token_ceiling_tracks_the_request_default() -> None:
+    """The evaluation CLI must not carry its own copy of the token ceiling.
+
+    Regression on a bug that silently invalidated a whole run. `RolloutRequest.max_tokens`
+    was raised from 700 to 1400 after hidden reasoning was found to truncate replies, but
+    `evaluate.py` kept `--max-tokens` defaulting to 700 and passes it explicitly, so it
+    overrode the dataclass. A re-run intended to use the corrected ceiling used the old
+    one, hit the same cache keys, served the previously-truncated documents from cache,
+    and reported `truncated_rate: 0.0` because those stale entries predate `finish_reason`.
+
+    Two values for one setting is the defect; the fix is that the CLI reads the dataclass.
+    """
+    import argparse
+
+    from research.evaluate import main as evaluate_main  # noqa: F401
+    from research.rollout import RolloutRequest
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--max-tokens", type=int, default=RolloutRequest.max_tokens)
+    assert parser.parse_args([]).max_tokens == RolloutRequest.max_tokens
+
+    source = (Path(__file__).resolve().parent.parent / "research" / "evaluate.py").read_text(
+        encoding="utf-8"
+    )
+    assert "default=RolloutRequest.max_tokens" in source, (
+        "evaluate.py must inherit the ceiling, not restate it"
+    )
+    assert "default=700" not in source, "a second hardcoded ceiling has reappeared"
